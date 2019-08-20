@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ruangan;
+use App\TahunAkademik;
 use DataTables;
 
-class RuanganController extends Controller
+class TahunakademikController extends Controller
 {
     public function json()
     {
-        return DataTables::of(Ruangan::all())
+        return DataTables::of(TahunAkademik::all())
         ->addColumn('action', function ($row) {
-            $action  = '<a href="/ruangan/'.$row->kode_ruangan.'/edit" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>';
-            $action .= \Form::open(['url'=>'ruangan/'.$row->kode_ruangan,'method'=>'delete','style'=>'float:right']);
+            $action  = '<a href="/tahunakademik/'.$row->kode_tahun_akademik.'/edit" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>';
+            $action .= \Form::open(['url'=>'tahunakademik/'.$row->kode_tahun_akademik,'method'=>'delete','style'=>'float:right']);
             $action .= "<button type='submit' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></button>";
             $action .= \Form::close();
             return $action;
@@ -28,7 +28,7 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        return view('ruangan.index');
+        return view('tahun_akademik.index');
     }
 
     /**
@@ -38,7 +38,7 @@ class RuanganController extends Controller
      */
     public function create()
     {
-        return view('ruangan.create');
+        return view('tahun_akademik.create');
     }
 
     /**
@@ -50,12 +50,12 @@ class RuanganController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_ruangan' => 'required|unique:ruangan|max:10',
-            'nama_ruangan' => 'required|min:6',
+            'kode_tahun_akademik' => 'required|unique:tahun_akademik|max:10',
+            'nama_tahun_akademik' => 'required|min:4',
         ]);
-        $ruangan = New ruangan();
-        $ruangan->create($request->all());
-        return redirect('/ruangan')->with('status', 'Data ruangan Berhasil Disimpan');
+        $tahun_akademik = New TahunAkademik();
+        $tahun_akademik->create($request->all());
+        return redirect('/tahunakademik')->with('status', 'Data Tahun Akademik Berhasil Disimpan');
     }
 
     /**
@@ -77,8 +77,8 @@ class RuanganController extends Controller
      */
     public function edit($id)
     {
-        $data['ruangan'] = ruangan::where('kode_ruangan',$id)->first();
-        return view('ruangan.edit', $data);
+        $data['tahun_akademik'] = TahunAkademik::where('kode_tahun_akademik',$id)->first();
+        return view('tahun_akademik.edit', $data);
     }
 
     /**
@@ -88,15 +88,15 @@ class RuanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $kode_ruangan)
+    public function update(Request $request, $kode_tahun_akademik)
     {
         $request->validate([
-            'nama_ruangan'     => 'required|min:4',
+            'nama_tahun_akademik'     => 'required|min:4',
         ]);
 
-        $ruangan = ruangan::where('kode_ruangan',"=",$kode_ruangan);
-        $ruangan->update($request->except('_method', '_token'));
-        return redirect('ruangan')->with('status', 'Data ruangan Berhasil Di Update');
+        $tahun_akademik = TahunAkademik::where('kode_tahun_akademik',"=",$kode_tahun_akademik);
+        $tahun_akademik->update($request->except('_method', '_token'));
+        return redirect('tahunakademik')->with('status', 'Data tahun_akademik Berhasil Di Update');
     }
 
     /**
@@ -105,10 +105,10 @@ class RuanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($kode_ruangan)
+    public function destroy($kode_tahun_akademik)
     {
-        $ruangan = ruangan::where('kode_ruangan',$kode_ruangan);
-        $ruangan->delete();
-        return redirect('/ruangan')->with('status', 'Data ruangan Berhasil Di Hapus');
+        $tahun_akademik = TahunAkademik::where('kode_tahun_akademik',$kode_tahun_akademik);
+        $tahun_akademik->delete();
+        return redirect('/tahunakademik')->with('status', 'Data tahun_akademik Berhasil Di Hapus');
     }
 }

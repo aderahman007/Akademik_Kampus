@@ -22,6 +22,7 @@ Route::get('/fakultas/json', 'FakultasController@json');
 Route::get('/dosen/json', 'DosenController@json');
 Route::get('/jurusan/json', 'JurusanController@json');
 Route::get('/ruangan/json', 'RuanganController@json');
+Route::get('/tahunakademik/json', 'TahunakademikController@json');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -30,3 +31,4 @@ Route::resource('/dosen', 'DosenController');
 Route::resource('/fakultas', 'FakultasController');
 Route::resource('/jurusan', 'JurusanController');
 Route::resource('/ruangan', 'RuanganController');
+Route::resource('/tahunakademik', 'TahunakademikController');

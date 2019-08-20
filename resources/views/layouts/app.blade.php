@@ -55,6 +55,9 @@
 
                         @else
                             <li class="nav-item">
+                                <a class="nav-link" href="/tahunakademik">Tahun Akademik</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/ruangan">Ruangan</a>
                             </li>
                             <li class="nav-item">
